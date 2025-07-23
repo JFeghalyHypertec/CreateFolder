@@ -62,7 +62,8 @@ def read_legend(excel_path: Path | io.BytesIO, sheet_name=0) -> dict[str, list[s
                     if (blank_seen == 2 and current_cat in SECOND_BLANK_STOP) or (current_cat in FIRST_BLANK_STOP):
                         break
                 else:
-                    vals.append(str(v).strip())
+                    if v!= "?":
+                        vals.append(str(v).strip())
                 j += 1
 
             results[current_cat] = vals
