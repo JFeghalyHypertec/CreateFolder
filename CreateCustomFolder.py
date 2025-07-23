@@ -128,8 +128,8 @@ if OPTIONS:
     st.markdown("---")
     st.subheader("Add Time and Server Information")
 
-    time_input = st.text_input("Enter time (e.g., 2025-07-23_14-00)")
-    server_input = st.text_input("Enter server name (e.g., Server01)")
+    time_input = st.text_input("Enter time (e.g., 30min)")
+    server_input = st.text_input("Enter server name (e.g., S1)")
 
     # Button
     if st.button("Create Folder"):
