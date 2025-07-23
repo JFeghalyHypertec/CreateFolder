@@ -79,6 +79,8 @@ def read_legend(excel_path: Path | io.BytesIO, sheet_name=0) -> dict[str, list[s
 
 
 def create_folder(base_dir: str, selections: list[str], time_str: str, server_str: str) -> str:
+    # Filter out blank selections
+    selections = [s for s in selections if s.strip()]
     folder_name = "_".join(selections + [time_str.strip(), server_str.strip()])
     full_path = os.path.join(base_dir, folder_name)
     os.makedirs(full_path, exist_ok=True)
@@ -115,14 +117,14 @@ if excel_source:
         st.error(f"Failed to read legend: {e}")
 
 if OPTIONS:
-    st.subheader("Select configuration options")
+    st.subheader("Select configuration options (optional)")
 
     # Keep track of widgets
     selections = {}
     cols = st.columns(1)  # single column, but easy to expand
     for label in OPTIONS:
         with cols[0]:
-            selections[label] = st.selectbox(label, [""] + OPTIONS[label], key=label)
+            selections[label] = st.selectbox(f"{label} (optional)", [""] + OPTIONS[label], key=label)
 
     # Additional inputs
     st.markdown("---")
@@ -133,13 +135,17 @@ if OPTIONS:
 
     # Button
     if st.button("Create Folder"):
-        if "" in selections.values() or not time_input.strip() or not server_input.strip():
-            st.warning("Please complete all selections, time, and server fields.")
+        if not time_input.strip() or not server_input.strip():
+            st.warning("Please enter both time and server.")
         else:
             try:
-                path_created = create_folder(out_dir, list(selections.values()), time_input, server_input)
+                selected_values = list(selections.values())
+                path_created = create_folder(out_dir, selected_values, time_input, server_input)
                 st.success(f"Folder created:\n{path_created}")
             except Exception as e:
                 st.error(f"Error creating folder: {e}")
 else:
     st.info("Load an Excel file to start.")
+
+# --- How to run ---
+st.caption("Run with: `streamlit run app.py`")
