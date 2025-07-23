@@ -143,6 +143,3 @@ if OPTIONS:
                 st.error(f"Error creating folder: {e}")
 else:
     st.info("Load an Excel file to start.")
-
-# --- How to run ---
-st.caption("Run with: `streamlit run app.py`")
