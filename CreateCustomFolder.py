@@ -12,10 +12,7 @@ FIRST_BLANK_STOP = {"Device Name", "Coolant", "Pump"}
 TARGET_WITHOUT_ABBREVIATION = {"Device Name", "Coolant"}
 SKIP = {"OCCT Version", "OCCT Test Setting", "Fan Settings", "CPU model"}
 
-DEFAULT_FILE = Path(
-    r"C:\Users\jfeghaly\OneDrive - Hypertec Group\HIS - Hypertec Innovation Studio - General"
-) / "1-Projects" / "1-Internal" / "RDS-24-08-MGC-RDS01 (MGCD)" / "Research" / "Results" / \
-  "Data Analysis" / "Code" / "CreateFolder" / "legend_prototype.xlsx"
+DEFAULT_FILE = Path("legend_prototype.xlsx")
 
 
 # ---------- Helpers ----------
